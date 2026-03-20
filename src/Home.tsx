@@ -1,31 +1,32 @@
 import React from 'react'
 import Sidebar from './components/Home/Sidebar'
-import {SidebarItem} from './components/Home/Sidebar'
+import { SidebarItem } from './components/Home/Sidebar'
 import {
-    LifeBuoy,
-    Receipt,
-    Boxes,
-    Package,
-    UserCircle,
-    BarChart3,
+    MessageSquareWarning,
+    CirclePlus,
+    History,
+    Users,
+    ChartPie,
+    Calendar,
     LayoutDashboard,
     Settings
 } from "lucide-react";
+import Body from './components/Home/Body';
 
 const Home = () => {
     return (<>
-        <div className='bg-[#121212] min-h-screen px-2'>
+        <div className='bg-[#0a0a0a] min-h-screen px-2 flex'>
             <Sidebar>
-                <SidebarItem icon={<LayoutDashboard size={20} />} text="Dashboard" alert/>
-                <SidebarItem icon={<Receipt size={20}/>} text="Orders" alert/>
-                <SidebarItem icon={<Boxes size={20}/>} text="Products" />
-                <SidebarItem icon={<Package size={20}/>} text="Inventory" />
-                <SidebarItem icon={<UserCircle size={20}/>} text="Customers" />
-                <SidebarItem icon={<BarChart3 size={20}/>} text="Statistics" active />
-                <hr className='my-3'/>
-                <SidebarItem icon={<LifeBuoy size={20}/>} text="Support" />
-                <SidebarItem icon={<Settings size={20}/>} text="Settings" />
+                <SidebarItem icon={<LayoutDashboard size={20} />} text="Dashboard" alert />
+                <SidebarItem icon={<CirclePlus size={20} />} text="New Session" />
+                <SidebarItem icon={<History size={20} />} text="Sessions" />
+                <SidebarItem icon={<Users size={20} />} text="Patients/Customers" />
+                <SidebarItem icon={<ChartPie size={20} />} text="Analytics" />
+                <SidebarItem icon={<Calendar size={20} />} text="Schedule Calls" />
+                <SidebarItem icon={<MessageSquareWarning size={20} />} text="Alerts" />
+                <SidebarItem icon={<Settings size={20} />} text="Settings" />
             </Sidebar>
+            <Body />
         </div>
     </>
     )
