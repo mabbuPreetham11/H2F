@@ -256,23 +256,36 @@ function setupAICall(server, app) {
 
   // ── Dashboard routes ─────────────────────────────────────────
   app.post('/create-ai-session', (req, res) => {
-    const sessionId = uuidv4();
-    sessions[sessionId] = {
-      customerName: req.body.customerName || 'Customer',
-      bankName: req.body.bankName || 'ABC Bank',
-      loanAccount: req.body.loanAccount || 'XXXX1234',
-      loanAmount: req.body.loanAmount || '50,000',
-      conversationHistory: [],
-      status: 'waiting',
-      summary: null,
-      customerWs: null
-    };
+  const sessionId = uuidv4();
+  sessions[sessionId] = {
+    sessionId,
+    customerName: req.body.customerName || 'Customer',
+    bankName: req.body.bankName || 'ABC Bank',
+    loanAccount: req.body.loanAccount || 'XXXX1234',
+    loanAmount: req.body.loanAmount || '50,000',
+    phoneNumber: req.body.phoneNumber || 'N/A',
+    conversationHistory: [],
+    status: 'waiting',
+    summary: null,
+    fullReport: null,
+    customerWs: null,
+    startTime: null,
+    createdAt: null,
+    lastLanguage: 'en-IN'
+  };
 
-    const customerLink =
-      `http://localhost:3000/customer-ai.html?session=${sessionId}`;
-    console.log(`[AI Call] Session created: ${sessionId}`);
-    res.json({ sessionId, customerLink });
-  });
+  // Automatically uses ngrok URL when accessed via ngrok
+  const protocol = req.headers['x-forwarded-proto'] || 'http';
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  const baseUrl = `${protocol}://${host}`;
+
+  const customerLink = `${baseUrl}/customer-ai.html?session=${sessionId}`;
+
+  console.log(`[AI Call] Session created: ${sessionId}`);
+  console.log(`[AI Call] Customer link: ${customerLink}`);
+
+  res.json({ sessionId, customerLink });
+});
 
   app.get('/ai-session/:id', (req, res) => {
     const s = sessions[req.params.id];
