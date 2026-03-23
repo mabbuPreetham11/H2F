@@ -1,9 +1,9 @@
 import { createContext, useContext, useState } from 'react'
 import { MoreVertical, TextAlignJustify } from "lucide-react"
 
-const SidebarContext = createContext({ expanded: true });
+const SidebarContext = createContext({ expanded: false });
 const SidebarProps = ({ children }: any) => {
-    const [expanded, setExpanded] = useState(true);
+    const [expanded, setExpanded] = useState(false);
     return (
         <aside className='h-screen w-fit bg-[#0f0e10] rounded-2xl'>
             <nav className='h-full flex flex-col shadow-sm'>
